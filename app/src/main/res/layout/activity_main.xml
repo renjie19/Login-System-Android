@@ -32,18 +32,9 @@
         android:id="@+id/manage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manage Employees"
+        android:text="Employees"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/reports"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manage Reports"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

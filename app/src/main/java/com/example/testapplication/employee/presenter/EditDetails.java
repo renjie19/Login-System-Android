@@ -25,10 +25,10 @@ public class EditDetails extends AppCompatActivity {
 
 
         edit_nameField.setText(employee.getName());
-        edit_ageField.setText(employee.getAge()+"");
+        edit_ageField.setText(String.valueOf(employee.getAge()));
         edit_addressField.setText(employee.getAddress());
         edit_positionField.setText(employee.getPosition());
-        edit_licenseField.setText(employee.getLicense().getLicenseNumber()+"");
+        edit_licenseField.setText(String.valueOf(employee.getLicense().getLicenseNumber()));
     }
     
     private void initializeFields(){

@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.testapplication.license.License;
 import com.example.testapplication.R;
 import com.example.testapplication.employee.model.Employee;
-import com.example.testapplication.employee.model.EmployeeService;
+import com.example.testapplication.employee.model.EmployeeServiceImpl;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateEmployee extends AppCompatActivity {
 
@@ -17,7 +22,7 @@ public class CreateEmployee extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
@@ -39,14 +44,28 @@ public class CreateEmployee extends AppCompatActivity {
                 employee.setPosition(positionField.getText().toString());
                 employee.setLicense(license);
 
-                EmployeeService employeeService = new EmployeeService();
-                employeeService.save(employee);
+                EmployeeServiceImpl employeeServiceImpl = new EmployeeServiceImpl();
+                employeeServiceImpl.save(employee).enqueue(new Callback<Employee>() {
+                    @Override
+                    public void onResponse(Call<Employee> call, Response<Employee> response) {
+                        if(!response.isSuccessful()){
+                            Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+                            nameField.setText(null);
+                            ageField.setText(null);
+                            addressField.setText(null);
+                            positionField.setText(null);
+                            licenseField.setText(null);
+                            finish();
+                        }
+                    }
 
-                nameField.setText(null);
-                ageField.setText(null);
-                addressField.setText(null);
-                positionField.setText(null);
-                licenseField.setText(null);
+                    @Override
+                    public void onFailure(Call<Employee> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 

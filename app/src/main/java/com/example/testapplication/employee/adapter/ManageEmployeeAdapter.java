@@ -1,9 +1,11 @@
 package com.example.testapplication.employee.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +39,7 @@ public class ManageEmployeeAdapter extends RecyclerView.Adapter<ManageEmployeeAd
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView name;
         ItemClick itemClick;
 
@@ -45,12 +47,19 @@ public class ManageEmployeeAdapter extends RecyclerView.Adapter<ManageEmployeeAd
             super(itemView);
             name = itemView.findViewById(R.id.employeeName);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             this.itemClick = itemClick;
         }
 
         @Override
         public void onClick(View v) {
             itemClick.itemClick(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClick.longClickAction(getAdapterPosition());
+            return false;
         }
     }
 
@@ -62,5 +71,6 @@ public class ManageEmployeeAdapter extends RecyclerView.Adapter<ManageEmployeeAd
 
     public interface ItemClick{
         void itemClick(int position);
+        void longClickAction(int position);
     }
 }
