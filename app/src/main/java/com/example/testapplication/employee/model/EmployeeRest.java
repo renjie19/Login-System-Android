@@ -4,8 +4,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface EmployeeRest {
     @GET("api/employee/getAll")
@@ -13,4 +15,10 @@ public interface EmployeeRest {
 
     @POST("api/employee/save")
     Call<Employee> save(@Body Employee employee);
+
+    @DELETE("api/employee/deleteEmployee")
+    Call delete(@Query("id") Integer id);
+
+    @POST("api/employee/update")
+    Call<Employee> update(@Body Employee employee);
 }

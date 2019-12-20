@@ -1,11 +1,9 @@
 package com.example.testapplication.employee.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,10 +26,8 @@ public class ManageEmployeeAdapter extends RecyclerView.Adapter<ManageEmployeeAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_in_list,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view,this.itemClick);
-
-        return viewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.employee_in_list,parent,false);
+        return new ViewHolder(view, this.itemClick);
     }
 
     @Override

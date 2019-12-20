@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<TimeLog> call, Response<TimeLog> response) {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Id does not Exist", Toast.LENGTH_SHORT).show();
                             } else {
                                 idField.setText("");
                                 Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();

@@ -24,7 +24,7 @@ public class CreateEmployee extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.employee_create);
 
         final EditText nameField = findViewById(R.id.nameField);
         final EditText ageField = findViewById(R.id.ageField);

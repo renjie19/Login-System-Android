@@ -2,7 +2,9 @@ package com.example.testapplication.report.model;
 
 import com.example.testapplication.timelog.model.TimeLog;
 
-public class Report {
+import java.io.Serializable;
+
+public class Report implements Serializable {
     private int id;
     private TimeLog timeInLog;
     private TimeLog timeOutLog;

@@ -1,13 +1,9 @@
 package com.example.testapplication.employee.model;
 
 
-import android.util.Log;
-
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,5 +20,15 @@ public class EmployeeServiceImpl implements  EmployeeService{
     @Override
     public Call<Employee> save(Employee employee) {
          return resourceHelper.save(employee);
+    }
+
+    @Override
+    public Call delete(int id) {
+        return resourceHelper.delete(id);
+    }
+
+    @Override
+    public Call<Employee> update(Employee employee) {
+        return resourceHelper.update(employee);
     }
 }

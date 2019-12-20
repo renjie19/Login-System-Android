@@ -28,13 +28,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/manage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Employees"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ringed_men_on"
         android:textSize="12sp"
+        app:backgroundTint="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="55dp"
+        app:pressedTranslationZ="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

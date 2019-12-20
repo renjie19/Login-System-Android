@@ -51,7 +51,7 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_employee);
+        setContentView(R.layout.employee_manage);
 
         findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,20 +72,30 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
 
     @Override
     public void longClickAction(int position) {
-        Employee employee = employees.get(position);
+        final Employee employee = employees.get(position);
         new AlertDialog.Builder(this)
                 .setTitle("Delete Employee ?")
                 .setMessage("Are you sure to remove "+employee.getName()+" ?")
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //delete employee code
-                        Toast.makeText(getApplicationContext(),"Employee Deleted",Toast.LENGTH_SHORT).show();
+                        resource.delete(employee.getEmployeeId()).enqueue(new Callback() {
+                            @Override
+                            public void onResponse(Call call, Response response) {
+                                finish();
+                                startActivity(getIntent());
+                                Toast.makeText(getApplicationContext(),"Process Complete", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+                                Toast.makeText(getApplicationContext(),t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 })
                 .setNegativeButton("NO", null )
                 .show();
-
     }
 
     private void setRecyclerView(){

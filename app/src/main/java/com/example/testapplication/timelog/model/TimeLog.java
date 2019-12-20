@@ -2,8 +2,10 @@ package com.example.testapplication.timelog.model;
 
 import com.example.testapplication.utils.StateEnum;
 
+import java.io.Serializable;
 
-public class TimeLog {
+
+public class TimeLog implements Serializable {
     private int id;
     private int employeeId;
     private StateEnum type;
