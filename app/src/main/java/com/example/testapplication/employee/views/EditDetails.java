@@ -1,4 +1,4 @@
-package com.example.testapplication.employee.presenter;
+package com.example.testapplication.employee.views;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -124,27 +124,27 @@ public class EditDetails extends AppCompatActivity {
                 employee.setPosition(String.valueOf(edit_positionField.getText()));
                 employee.getLicense().setLicenseNumber(Integer.parseInt(edit_licenseField.getText().toString()));
 
-                EmployeeService service = new EmployeeServiceImpl();
-                service.update(employee).enqueue(new Callback<Employee>() {
-
-                    @Override
-                    public void onResponse(Call<Employee> call, Response<Employee> response) {
-                        if (!response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Updated Successfully!", Toast.LENGTH_LONG).show();
-                        }
-                        updateButton.setEnabled(true);
-                        onResume();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Employee> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                        updateButton.setEnabled(true);
-                    }
-                });
+//                EmployeeService service = new EmployeeServiceImpl();
+//                service.update(employee).enqueue(new Callback<Employee>() {
+//
+//                    @Override
+//                    public void onResponse(Call<Employee> call, Response<Employee> response) {
+//                        if (!response.isSuccessful()) {
+//                            Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
+//                        } else {
+//                            Toast.makeText(getApplicationContext(), "Updated Successfully!", Toast.LENGTH_LONG).show();
+//                        }
+//                        updateButton.setEnabled(true);
+//                        onResume();
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Employee> call, Throwable t) {
+//                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+//                        updateButton.setEnabled(true);
+//                    }
+//                });
             }
         });
     }

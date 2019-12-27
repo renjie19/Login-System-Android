@@ -3,7 +3,9 @@ package com.example.testapplication.subject;
 
 import java.io.Serializable;
 
-public class Subject implements Serializable {
+import io.realm.RealmObject;
+
+public class Subject extends RealmObject implements Serializable {
     private int id;
     private String subjectName;
 

@@ -3,7 +3,9 @@ package com.example.testapplication.license;
 
 import java.io.Serializable;
 
-public class License implements Serializable {
+import io.realm.RealmObject;
+
+public class License extends RealmObject implements Serializable {
     private int licenseId;
     private int licenseNumber;
 

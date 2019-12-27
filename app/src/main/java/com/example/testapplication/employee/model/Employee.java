@@ -11,16 +11,19 @@ import com.example.testapplication.subject.Subject;
 import java.io.Serializable;
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
-public class Employee implements Serializable {
+
+public class Employee extends RealmObject implements Serializable {
     private int employeeId;
     private String name;
     private int age;
     private String address;
     private String position;
     private License license;
-    private List<Subject> subjectList;
-    private List<Section> sectionList;
+    private RealmList<Subject> subjectList;
+    private RealmList<Section> sectionList;
 
     public int getEmployeeId() {
         return employeeId;
@@ -74,7 +77,7 @@ public class Employee implements Serializable {
         return subjectList;
     }
 
-    public void setSubjectList(List<Subject> subjectList) {
+    public void setSubjectList(RealmList<Subject> subjectList) {
         this.subjectList = subjectList;
     }
 
@@ -82,7 +85,7 @@ public class Employee implements Serializable {
         return sectionList;
     }
 
-    public void setSectionList(List<Section> sectionList) {
+    public void setSectionList(RealmList<Section> sectionList) {
         this.sectionList = sectionList;
     }
 }

@@ -4,6 +4,8 @@ import com.example.testapplication.timelog.model.TimeLog;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 public class Report implements Serializable {
     private int id;
     private TimeLog timeInLog;

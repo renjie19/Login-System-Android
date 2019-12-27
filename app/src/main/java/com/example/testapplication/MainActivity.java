@@ -6,14 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TabHost;
 import android.widget.Toast;
 
-import com.example.testapplication.employee.presenter.ManageEmployee;
+import com.example.testapplication.employee.views.ManageEmployee;
 import com.example.testapplication.timelog.model.TimeLog;
 import com.example.testapplication.timelog.model.TimelogRest;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;

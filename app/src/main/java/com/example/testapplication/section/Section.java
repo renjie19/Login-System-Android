@@ -3,7 +3,9 @@ package com.example.testapplication.section;
 
 import java.io.Serializable;
 
-public class Section implements Serializable {
+import io.realm.RealmObject;
+
+public class Section extends RealmObject implements Serializable {
     private int sectionId;
     private String sectionName;
     private String yearLevel;
