@@ -22,21 +22,17 @@ import com.example.testapplication.employee.model.EmployeeServiceImpl;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ManageEmployee extends AppCompatActivity implements ManageEmployeeAdapter.ItemClick, EmployeeCallBack {
 
     private List<Employee> employees;
-    private EmployeeService service;
     private EmployeePresenter presenter = new EmployeePresenter(this);
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_manage);
-        this.service = new EmployeeServiceImpl(this);
+        this.rv = findViewById(R.id.employee_rv);
 
         findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +46,7 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     @Override
     protected void onResume() {
         super.onResume();
-        setRecyclerView();
+        loadEmployees();
     }
 
     @Override
@@ -77,20 +73,12 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
                 .show();
     }
 
-    private void setRecyclerView(){
-        this.employees = presenter.getAll();
-        RecyclerView rv = findViewById(R.id.employee_rv);
-        ManageEmployeeAdapter manageEmployeeAdapter = new ManageEmployeeAdapter(employees, this);
-        rv.setAdapter(manageEmployeeAdapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-    }
-
     @Override
     public void onSuccess(Employee employee) {
         Toast positive = Toast.makeText(getApplicationContext(),"Complete",Toast.LENGTH_LONG);
         positive.getView().setBackgroundColor(Color.GREEN);
         positive.show();
-        setRecyclerView();
+        loadEmployees();
     }
 
     @Override
@@ -98,5 +86,12 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
         Toast negative = Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG);
         negative.getView().setBackgroundColor(Color.RED);
         negative.show();
+    }
+
+    private void loadEmployees(){
+        this.employees = presenter.getAll();
+        ManageEmployeeAdapter manageEmployeeAdapter = new ManageEmployeeAdapter(employees, this);
+        rv.setAdapter(manageEmployeeAdapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
     }
 }

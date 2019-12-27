@@ -26,7 +26,6 @@ public class EmployeePresenter {
             @Override
             public void run() {
                 service.save(employee);
-                callBack.onSuccess(employee);
             }
         }).start();
     }

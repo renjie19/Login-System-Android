@@ -7,7 +7,6 @@ import com.example.testapplication.employee.EmployeeCallBack;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,15 +31,14 @@ public class EmployeeServiceImpl implements  EmployeeService{
     }
 
     @Override
-    public Employee save(Employee employee) {
+    public void save(Employee employee) {
         try {
             Employee result = resourceHelper.save(employee).execute().body();
             callBack.onSuccess(result);
-            return result;
+            syncData();
         } catch (IOException e) {
             callBack.onFailure(e.getMessage());
         }
-        return null;
     }
 
     @Override

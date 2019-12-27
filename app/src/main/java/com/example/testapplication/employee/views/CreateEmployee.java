@@ -51,19 +51,6 @@ public class CreateEmployee extends AppCompatActivity implements EmployeeCallBac
                 presenter.save(employee);
             }
         });
-
-
-
-
-
-    }
-
-    private void clearFields() {
-        this.nameField.setText("");
-        this.ageField.setText("");
-        this.addressField.setText("");
-        this.positionField.setText("");
-        this.licenseField.setText("");
     }
 
     @Override
@@ -89,5 +76,13 @@ public class CreateEmployee extends AppCompatActivity implements EmployeeCallBac
                 negative.show();
             }
         });
+    }
+
+    private void clearFields() {
+        this.nameField.setText("");
+        this.ageField.setText("");
+        this.addressField.setText("");
+        this.positionField.setText("");
+        this.licenseField.setText("");
     }
 }
