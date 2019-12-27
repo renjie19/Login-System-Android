@@ -49,10 +49,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-//                realm.where(Employee.class).findAll().deleteAllFromRealm();
                 RealmList<Employee> realmList = new RealmList<>();
                 realmList.addAll(list);
                 realm.insertOrUpdate(realmList);
+            }
+        });
+    }
+
+    @Override
+    public void delete(final int id) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Employee employee = realm.where(Employee.class).equalTo("employeeId", id).findFirst();
+                if(employee != null) {
+                    employee.deleteFromRealm();
+                }
             }
         });
     }

@@ -7,6 +7,7 @@ import com.example.testapplication.employee.EmployeeCallBack;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,14 +53,24 @@ public class EmployeeServiceImpl implements  EmployeeService{
 
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
-                Log.d("Failed", "onFailure: fetching list");
+                Log.d("Failed", "onFailure: Fetching list failed!!!!");
             }
         });
     }
 
     @Override
-    public Call delete(int id) {
-        return resourceHelper.delete(id);
+    public void delete(final int id) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    resourceHelper.delete(id).execute();
+                } catch (IOException e) {
+                    Log.d("Deletion", "Error Occurred "+e.getMessage());
+                }
+            }
+        }).start();
+        repository.delete(id);
     }
 
     @Override

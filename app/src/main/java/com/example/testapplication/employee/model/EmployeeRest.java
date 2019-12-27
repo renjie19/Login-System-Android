@@ -17,7 +17,7 @@ public interface EmployeeRest {
     Call<Employee> save(@Body Employee employee);
 
     @DELETE("api/employee/deleteEmployee")
-    Call delete(@Query("id") Integer id);
+    Call<Employee> delete(@Query("id") int id);
 
     @POST("api/employee/update")
     Call<Employee> update(@Body Employee employee);

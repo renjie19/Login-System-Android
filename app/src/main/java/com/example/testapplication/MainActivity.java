@@ -69,15 +69,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         presenter.sync();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         Realm.getDefaultInstance().close();
     }
 }

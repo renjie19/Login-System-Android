@@ -30,7 +30,7 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
 
     private List<Employee> employees;
     private EmployeeService service;
-    private EmployeePresenter presenter = new EmployeePresenter(null);
+    private EmployeePresenter presenter = new EmployeePresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,6 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     @Override
     protected void onResume() {
         super.onResume();
-        this.employees = presenter.getAll();
         setRecyclerView();
     }
 
@@ -65,32 +64,21 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     @Override
     public void longClickAction(int position) {
         final Employee employee = employees.get(position);
-//        new AlertDialog.Builder(this)
-//                .setTitle("Delete Employee ?")
-//                .setMessage("Are you sure to remove "+employee.getName()+" ?")
-//                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        resource.delete(employee.getEmployeeId()).enqueue(new Callback() {
-//                            @Override
-//                            public void onResponse(Call call, Response response) {
-//                                finish();
-//                                startActivity(getIntent());
-//                                Toast.makeText(getApplicationContext(),"Process Complete", Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call call, Throwable t) {
-//                                Toast.makeText(getApplicationContext(),t.getMessage(), Toast.LENGTH_LONG).show();
-//                            }
-//                        });
-//                    }
-//                })
-//                .setNegativeButton("NO", null )
-//                .show();
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Employee ?")
+                .setMessage("Are you sure to remove "+employee.getName()+" ?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.delete(employee);
+                    }
+                })
+                .setNegativeButton("NO", null )
+                .show();
     }
 
     private void setRecyclerView(){
+        this.employees = presenter.getAll();
         RecyclerView rv = findViewById(R.id.employee_rv);
         ManageEmployeeAdapter manageEmployeeAdapter = new ManageEmployeeAdapter(employees, this);
         rv.setAdapter(manageEmployeeAdapter);
@@ -98,19 +86,8 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     }
 
     @Override
-    public void onSuccess(List<Employee> employees) {
-        this.employees = employees;
-        setRecyclerView();
-    }
-
-    @Override
     public void onSuccess(Employee employee) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                setRecyclerView();
-            }
-        });
+        setRecyclerView();
     }
 
     @Override

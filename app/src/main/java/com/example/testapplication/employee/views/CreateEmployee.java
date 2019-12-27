@@ -67,11 +67,6 @@ public class CreateEmployee extends AppCompatActivity implements EmployeeCallBac
     }
 
     @Override
-    public void onSuccess(List<Employee> employees) {
-
-    }
-
-    @Override
     public void onSuccess(Employee employee) {
         runOnUiThread(new Runnable() {
             @Override
