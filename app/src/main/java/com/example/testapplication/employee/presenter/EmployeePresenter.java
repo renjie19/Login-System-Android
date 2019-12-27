@@ -32,4 +32,8 @@ public class EmployeePresenter {
     public List<Employee> getAll() {
         return repository.getAll();
     }
+
+    public void sync() {
+        service.syncData();
+    }
 }

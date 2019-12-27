@@ -16,6 +16,7 @@ import com.example.testapplication.R;
 import com.example.testapplication.employee.EmployeeCallBack;
 import com.example.testapplication.employee.model.Employee;
 import com.example.testapplication.employee.adapter.ManageEmployeeAdapter;
+import com.example.testapplication.employee.model.EmployeeService;
 import com.example.testapplication.employee.presenter.EmployeePresenter;
 import com.example.testapplication.employee.model.EmployeeServiceImpl;
 
@@ -28,34 +29,14 @@ import retrofit2.Response;
 public class ManageEmployee extends AppCompatActivity implements ManageEmployeeAdapter.ItemClick, EmployeeCallBack {
 
     private List<Employee> employees;
-//    private EmployeeServiceImpl resource = new EmployeeServiceImpl();
-    private EmployeePresenter presenter = new EmployeePresenter(this);
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.getAll();
-
-
-//        resource.getAllEmployees().enqueue(new Callback<List<Employee>>() {
-//            @Override
-//            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
-//                employees = response.body();
-//                setRecyclerView();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Employee>> call, Throwable t) {
-//                Log.d("GetEmployees Failed -> ", t.getMessage());
-//            }
-//        });
-
-    }
+    private EmployeeService service;
+    private EmployeePresenter presenter = new EmployeePresenter(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_manage);
+        this.service = new EmployeeServiceImpl(this);
 
         findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +48,17 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        this.employees = presenter.getAll();
+        setRecyclerView();
+    }
+
+    @Override
     public void itemClick(int position) {
         Employee employee = employees.get(position);
         Intent editActivity = new Intent(getApplicationContext(),EditDetails.class);
-        editActivity.putExtra("data",employee);
+        editActivity.putExtra("data", employee);
         startActivity(editActivity);
     }
 

@@ -1,12 +1,16 @@
 package com.example.testapplication.employee.model;
 
 
+import android.util.Log;
+
 import com.example.testapplication.employee.EmployeeCallBack;
 
 import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -30,13 +34,27 @@ public class EmployeeServiceImpl implements  EmployeeService{
     public Employee save(Employee employee) {
         try {
             Employee result = resourceHelper.save(employee).execute().body();
-            repository.save(employee);
             callBack.onSuccess(result);
             return result;
         } catch (IOException e) {
             callBack.onFailure(e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public void syncData() {
+        resourceHelper.getEmployees().enqueue(new Callback<List<Employee>>() {
+            @Override
+            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
+                repository.saveAll(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Employee>> call, Throwable t) {
+                Log.d("Failed", "onFailure: fetching list");
+            }
+        });
     }
 
     @Override

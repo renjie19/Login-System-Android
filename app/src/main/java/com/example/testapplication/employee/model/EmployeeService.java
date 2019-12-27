@@ -9,6 +9,7 @@ import retrofit2.Call;
 public interface EmployeeService {
     Call<List<Employee>> getAllEmployees();
     Employee save(Employee employee);
+    void syncData();
     Call delete(int id);
     Call<Employee> update(Employee employee);
 }

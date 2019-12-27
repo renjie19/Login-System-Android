@@ -54,7 +54,7 @@ public class EditDetails extends AppCompatActivity {
         setContentView(R.layout.employee_edit_details);
         initializeFields();
 
-        employee = (Employee) getIntent().getSerializableExtra("data");
+        this.employee = getIntent().getParcelableExtra("data");
 
         subject_button.setOnClickListener(new View.OnClickListener() {
             @Override

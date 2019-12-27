@@ -8,22 +8,27 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.testapplication.employee.presenter.EmployeePresenter;
 import com.example.testapplication.employee.views.ManageEmployee;
 import com.example.testapplication.timelog.model.TimeLog;
 import com.example.testapplication.timelog.model.TimelogRest;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    private EmployeePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.presenter = new EmployeePresenter(null);
 
         findViewById(R.id.manage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,5 +66,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.sync();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Realm.getDefaultInstance().close();
     }
 }

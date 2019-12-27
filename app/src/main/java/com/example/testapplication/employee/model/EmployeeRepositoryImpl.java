@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
     Realm realm = Realm.getDefaultInstance();
@@ -36,8 +37,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         });
     }
 
+
+
     @Override
     public List<Employee> getAll() {
         return realm.where(Employee.class).findAll();
+    }
+
+    @Override
+    public void saveAll(final List<Employee> list) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+//                realm.where(Employee.class).findAll().deleteAllFromRealm();
+                RealmList<Employee> realmList = new RealmList<>();
+                realmList.addAll(list);
+                realm.insertOrUpdate(realmList);
+            }
+        });
     }
 }
