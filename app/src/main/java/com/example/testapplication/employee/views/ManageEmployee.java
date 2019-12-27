@@ -87,18 +87,16 @@ public class ManageEmployee extends AppCompatActivity implements ManageEmployeeA
 
     @Override
     public void onSuccess(Employee employee) {
+        Toast positive = Toast.makeText(getApplicationContext(),"Complete",Toast.LENGTH_LONG);
+        positive.getView().setBackgroundColor(Color.GREEN);
+        positive.show();
         setRecyclerView();
     }
 
     @Override
     public void onFailure(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast negative = Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG);
-                negative.getView().setBackgroundColor(Color.RED);
-                negative.show();
-            }
-        });
+        Toast negative = Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG);
+        negative.getView().setBackgroundColor(Color.RED);
+        negative.show();
     }
 }
