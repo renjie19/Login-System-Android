@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApplication</string>
+    <string name="app_name">LoginSystem</string>
     <string name="title_activity_navigation">navigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,4 +18,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_manage_employees">ManageEmployees</string>
     <string name="BASE_URL">http://172.16.0.172:8080</string>
+    <string name="IP">172.16.0.172</string>
 </resources>

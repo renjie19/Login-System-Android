@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.testapplication.employee.model.EmployeeService;
-import com.example.testapplication.employee.model.EmployeeServiceImpl;
-import com.example.testapplication.report.presenter.ManageReports;
+import com.example.testapplication.employee.EmployeeCallBack;
+import com.example.testapplication.employee.presenter.EmployeePresenter;
+import com.example.testapplication.report.ReportCallBack;
+import com.example.testapplication.report.views.ManageReports;
 import com.example.testapplication.R;
 import com.example.testapplication.employee.model.Employee;
 import com.example.testapplication.report.model.Report;
@@ -25,13 +27,15 @@ import com.example.testapplication.report.model.ReportService;
 import com.example.testapplication.report.model.ReportServiceImpl;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditDetails extends AppCompatActivity {
+public class EditDetails extends AppCompatActivity implements EmployeeCallBack, ReportCallBack {
 
     private EditText edit_nameField;
     private EditText edit_ageField;
@@ -47,12 +51,16 @@ public class EditDetails extends AppCompatActivity {
     private DatePicker endDate;
     private Employee employee;
     private Button updateButton;
+    private EmployeePresenter employeePresenter;
+    private ReportService reportService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_edit_details);
         initializeFields();
+        employeePresenter = new EmployeePresenter(this);
+        reportService = new ReportServiceImpl(this);
 
         this.employee = getIntent().getParcelableExtra("data");
 
@@ -83,33 +91,10 @@ public class EditDetails extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String start = startDate.getYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDayOfMonth();
                         String end = endDate.getYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDayOfMonth();
-                        ReportService reportService = new ReportServiceImpl();
-                        reportService.getReport(employee.getEmployeeId(), start, end).enqueue(new Callback<List<Report>>() {
-
-                            @Override
-                            public void onResponse(Call<List<Report>> call, Response<List<Report>> response) {
-                                if (!response.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
-                                }
-                                List<Report> reports = response.body();
-                                Intent manageReports = new Intent(getApplicationContext(), ManageReports.class);
-                                manageReports.putExtra("report", (Serializable) reports);
-                                startActivity(manageReports);
-                            }
-
-                            @Override
-                            public void onFailure(Call<List<Report>> call, Throwable t) {
-                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        reportService.getReport(employee.getEmployeeId(), start, end);
                     }
                 });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+                builder.setNegativeButton("CANCEL", null);
                 builder.show();
             }
         });
@@ -123,28 +108,7 @@ public class EditDetails extends AppCompatActivity {
                 employee.setAddress(String.valueOf(edit_addressField.getText()));
                 employee.setPosition(String.valueOf(edit_positionField.getText()));
                 employee.getLicense().setLicenseNumber(Integer.parseInt(edit_licenseField.getText().toString()));
-
-//                EmployeeService service = new EmployeeServiceImpl();
-//                service.update(employee).enqueue(new Callback<Employee>() {
-//
-//                    @Override
-//                    public void onResponse(Call<Employee> call, Response<Employee> response) {
-//                        if (!response.isSuccessful()) {
-//                            Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_LONG).show();
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "Updated Successfully!", Toast.LENGTH_LONG).show();
-//                        }
-//                        updateButton.setEnabled(true);
-//                        onResume();
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Employee> call, Throwable t) {
-//                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-//                        updateButton.setEnabled(true);
-//                    }
-//                });
+                employeePresenter.update(employee);
             }
         });
     }
@@ -174,5 +138,24 @@ public class EditDetails extends AppCompatActivity {
         this.section_button = findViewById(R.id.sectionsButton);
         this.report_button = findViewById(R.id.reportsButton);
         this.updateButton = findViewById(R.id.edit_updateButton);
+    }
+
+    @Override
+    public void onSuccess(Employee employee) {
+        Toast.makeText(this,"Complete", Toast.LENGTH_SHORT).show();
+        updateButton.setEnabled(true);
+    }
+
+    @Override
+    public void onSuccess(List<Report> list) {
+        ArrayList<Report> reports = ((ArrayList<Report>) list);
+        Intent manageReports = new Intent(getApplicationContext(), ManageReports.class);
+        manageReports.putParcelableArrayListExtra("report", reports);
+        startActivity(manageReports);
+    }
+
+    @Override
+    public void onFailure(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 }

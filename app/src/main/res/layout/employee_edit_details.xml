@@ -7,147 +7,132 @@
     android:layout_gravity="center"
     tools:context=".employee.views.EditDetails">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Employee Details"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="6dp" />
-
-    <EditText
-        android:id="@+id/edit_nameField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Employee Name"
-        android:inputType="textPersonName"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_employeeId" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/edit_ageField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_nameField"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Age"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_nameField" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Employee Details"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edit_addressField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_ageField"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Address"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_ageField" />
+        <EditText
+            android:id="@+id/edit_employeeId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:editable="false"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="Id"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/edit_positionField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_addressField"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Position"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_addressField" />
+        <EditText
+            android:id="@+id/edit_nameField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Employee Name"
+            android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/edit_licenseField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_positionField"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="License Code"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_positionField" />
+        <EditText
+            android:id="@+id/edit_ageField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_nameField"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Age"
+            android:inputType="number" />
 
-    <ImageButton
-        android:id="@+id/sectionsButton"
-        android:layout_width="47dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_licenseField"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+        <EditText
+            android:id="@+id/edit_addressField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_ageField"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPersonName" />
 
-    <ImageButton
-        android:id="@+id/subjectButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/sectionsButton"
-        app:layout_constraintTop_toBottomOf="@+id/edit_licenseField"
-        app:srcCompat="@drawable/ic_menu_gallery" />
+        <EditText
+            android:id="@+id/edit_positionField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_addressField"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Position"
+            android:inputType="textPersonName" />
 
-    <ImageButton
-        android:id="@+id/reportsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/sectionsButton"
-        app:layout_constraintTop_toBottomOf="@+id/edit_licenseField"
-        app:srcCompat="@android:drawable/stat_sys_phone_call" />
+        <EditText
+            android:id="@+id/edit_licenseField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_positionField"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="License Code"
+            android:inputType="number" />
 
-    <EditText
-        android:id="@+id/edit_employeeId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:editable="false"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="Id"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/edit_updateButton"
-        android:layout_width="213dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="8dp"
-        android:enabled="true"
-        android:text="UPDATE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sectionsButton" />
+            <ImageButton
+                android:id="@+id/subjectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_menu_gallery" />
+
+            <ImageButton
+                android:id="@+id/sectionsButton"
+                android:layout_width="47dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <ImageButton
+                android:id="@+id/reportsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/stat_sys_phone_call" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/edit_updateButton"
+            android:layout_width="213dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="20dp"
+            android:enabled="true"
+            android:text="UPDATE" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

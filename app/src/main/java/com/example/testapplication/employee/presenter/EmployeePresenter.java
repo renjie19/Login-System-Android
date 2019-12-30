@@ -38,12 +38,16 @@ public class EmployeePresenter {
         service.syncData();
     }
 
-    public void delete(final Employee employee) {
+    public void delete(Employee employee) {
         try {
             service.delete(employee.getEmployeeId());
             callBack.onSuccess(null);
         } catch (IOException e) {
             callBack.onFailure(e.getMessage());
         }
+    }
+
+    public void update(Employee employee) {
+        service.update(employee);
     }
 }

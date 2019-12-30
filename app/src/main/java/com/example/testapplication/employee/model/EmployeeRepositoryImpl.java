@@ -8,7 +8,7 @@ import io.realm.Realm;
 import io.realm.RealmList;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-    Realm realm = Realm.getDefaultInstance();
+    private Realm realm = Realm.getDefaultInstance();
 
     @Override
     public void save(final Employee employee) {
@@ -16,13 +16,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             @Override
             public void execute(Realm realm) {
                 realm.insert(employee);
-//                Employee realmEmployee = realm.createObject(Employee.class);
-//                realmEmployee.setEmployeeId(employee.getEmployeeId());
-//                realmEmployee.setName(employee.getName());
-//                realmEmployee.setAge(employee.getAge());
-//                realmEmployee.setAddress(employee.getAddress());
-//                realmEmployee.setPosition(employee.getPosition());
-//                realmEmployee.setLicense(employee.getLicense());
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

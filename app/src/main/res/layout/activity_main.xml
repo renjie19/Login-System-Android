@@ -4,43 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#32328B"
     tools:context=".MainActivity">
-
-    <EditText
-        android:id="@+id/idField"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Employee Id"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:text="Button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="300dp"
+        android:layout_height="58dp"
+        android:background="@drawable/white_oval_border_only"
+        android:text="SUBMIT"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
+
+    <EditText
+        android:id="@+id/idField"
+        style="@android:style/Widget.EditText"
+        android:layout_width="300dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/oval_gray"
+        android:ems="10"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:hint="Employee Id"
+        android:inputType="number"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="118dp"
+        android:layout_height="118dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/idField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ringed_man_on" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/manage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ringed_men_on"
         android:textSize="12sp"
         app:backgroundTint="#00FFFFFF"
+        app:elevation="0dp"
+        app:fabCustomSize="55dp"
+        app:fabSize="auto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="55dp"
-        app:pressedTranslationZ="10dp" />
+        app:pressedTranslationZ="0dp"
+        app:rippleColor="#00FFFFFF" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settings_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:src="@drawable/ringed_config_icon"
+        android:textSize="12sp"
+        app:backgroundTint="#00FFFFFF"
+        app:elevation="0dp"
+        app:fabCustomSize="55dp"
+        app:fabSize="auto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="55dp"
+        app:pressedTranslationZ="0dp"
+        app:rippleColor="#00FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,5 @@ public interface EmployeeService {
     void save(Employee employee);
     void syncData();
     void delete(int id) throws IOException;
-    Call<Employee> update(Employee employee);
+    void update(Employee employee);
 }

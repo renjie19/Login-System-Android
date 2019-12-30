@@ -1,4 +1,4 @@
-package com.example.testapplication.report.presenter;
+package com.example.testapplication.report.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +21,7 @@ public class ManageReports extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reports_manage);
-        reports = (List<Report>) getIntent().getSerializableExtra("report");
+        reports = getIntent().getParcelableArrayListExtra("report");
     }
 
     @Override
