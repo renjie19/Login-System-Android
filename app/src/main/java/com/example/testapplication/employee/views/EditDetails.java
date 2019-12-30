@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.testapplication.employee.EmployeeCallBack;
@@ -64,52 +65,38 @@ public class EditDetails extends AppCompatActivity implements EmployeeCallBack, 
 
         this.employee = getIntent().getParcelableExtra("data");
 
-        subject_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        subject_button.setOnClickListener(v -> {
 
-            }
         });
 
-        section_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        section_button.setOnClickListener(v -> {
 
-            }
         });
 
-        report_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.report_date_select, null);
-                startDate = view.findViewById(R.id.startDatePicker);
-                endDate = view.findViewById(R.id.endDatePicker);
-                builder.setView(view);
-                builder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String start = startDate.getYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDayOfMonth();
-                        String end = endDate.getYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDayOfMonth();
-                        reportService.getReport(employee.getEmployeeId(), start, end);
-                    }
-                });
-                builder.setNegativeButton("CANCEL", null);
-                builder.show();
-            }
+        report_button.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            View view = LayoutInflater.from(context).inflate(R.layout.report_date_select, null);
+            startDate = view.findViewById(R.id.startDatePicker);
+            endDate = view.findViewById(R.id.endDatePicker);
+            builder.setView(view);
+            builder.setPositiveButton("SUBMIT", (dialog, which) -> {
+                String start = startDate.getYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDayOfMonth();
+                String end = endDate.getYear() + "-" + (endDate.getMonth() + 1) + "-" + endDate.getDayOfMonth();
+                reportService.getReport(employee.getEmployeeId(), start, end);
+            });
+            builder.setNegativeButton("CANCEL", null);
+            builder.show();
         });
 
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateButton.setEnabled(false);
-                employee.setName(edit_nameField.getText().toString());
-                employee.setAge(Integer.parseInt(edit_ageField.getText().toString()));
-                employee.setAddress(String.valueOf(edit_addressField.getText()));
-                employee.setPosition(String.valueOf(edit_positionField.getText()));
-                employee.getLicense().setLicenseNumber(Integer.parseInt(edit_licenseField.getText().toString()));
-                employeePresenter.update(employee);
-            }
+        updateButton.setOnClickListener(v -> {
+            updateButton.setEnabled(false);
+            employee.setName(edit_nameField.getText().toString());
+            employee.setAge(Integer.parseInt(edit_ageField.getText().toString()));
+            employee.setAddress(String.valueOf(edit_addressField.getText()));
+            employee.setPosition(String.valueOf(edit_positionField.getText()));
+            employee.getLicense().setLicenseNumber(Integer.parseInt(edit_licenseField.getText().toString()));
+            employeePresenter.update(employee);
+
         });
     }
 
@@ -149,9 +136,13 @@ public class EditDetails extends AppCompatActivity implements EmployeeCallBack, 
     @Override
     public void onSuccess(List<Report> list) {
         ArrayList<Report> reports = ((ArrayList<Report>) list);
-        Intent manageReports = new Intent(getApplicationContext(), ManageReports.class);
-        manageReports.putParcelableArrayListExtra("report", reports);
-        startActivity(manageReports);
+        if(reports.size() != 0) {
+            Intent manageReports = new Intent(getApplicationContext(), ManageReports.class);
+            manageReports.putParcelableArrayListExtra("report", reports);
+            startActivity(manageReports);
+        } else {
+            Toast.makeText(this, "No Records Found", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

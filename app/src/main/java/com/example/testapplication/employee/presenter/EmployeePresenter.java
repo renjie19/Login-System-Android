@@ -22,12 +22,7 @@ public class EmployeePresenter {
     }
 
     public void save(final Employee employee){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                service.save(employee);
-            }
-        }).start();
+        new Thread(() -> service.save(employee)).start();
     }
 
     public List<Employee> getAll() {

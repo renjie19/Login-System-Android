@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/bg"
     tools:context=".employee.views.EditDetails">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="322dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -24,6 +26,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="Employee Details"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -32,11 +35,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:background="#48AAAAAA"
+            android:clickable="false"
             android:editable="false"
             android:ems="10"
             android:enabled="false"
+            android:gravity="center"
             android:hint="Id"
-            android:inputType="number" />
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/edit_nameField"
@@ -47,8 +53,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="Employee Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/edit_ageField"
@@ -59,8 +67,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="Age"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/edit_addressField"
@@ -71,8 +81,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="Address"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/edit_positionField"
@@ -83,8 +95,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="Position"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/edit_licenseField"
@@ -95,8 +109,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="License Code"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="#FFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,6 +149,7 @@
             android:layout_marginBottom="20dp"
             android:enabled="true"
             android:text="UPDATE" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

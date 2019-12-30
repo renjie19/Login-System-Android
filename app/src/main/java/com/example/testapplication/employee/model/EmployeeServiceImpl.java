@@ -27,11 +27,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Call<List<Employee>> getAllEmployees() {
-        return resourceHelper.getEmployees();
-    }
-
-    @Override
     public void save(Employee employee) {
         try {
             Employee result = resourceHelper.save(employee).execute().body();
@@ -59,14 +54,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(final int id) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    resourceHelper.delete(id).execute();
-                } catch (IOException e) {
-                    Log.d("Deletion", "Error Occurred " + e.getMessage());
-                }
+        new Thread(() -> {
+            try {
+                resourceHelper.delete(id).execute();
+            } catch (IOException e) {
+                Log.d("Deletion", "Error Occurred " + e.getMessage());
             }
         }).start();
         repository.delete(id);
