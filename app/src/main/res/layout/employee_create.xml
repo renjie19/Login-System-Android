@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".employee.views.CreateEmployee">
+    tools:context=".employee.views.create.CreateEmployeeActivity">
 
     <Button
         android:id="@+id/submitButton"
@@ -65,6 +65,7 @@
             android:ems="10"
             android:hint="Age"
             android:inputType="number"
+            android:maxLength="2"
             android:textColor="#FFFFFF"
             android:textColorHint="#AFAFAF" />
 
@@ -98,6 +99,7 @@
             android:ems="10"
             android:hint="License Number"
             android:inputType="number"
+            android:maxLength="5"
             android:textColor="#FFFFFF"
             android:textColorHint="#AFAFAF" />
     </LinearLayout>

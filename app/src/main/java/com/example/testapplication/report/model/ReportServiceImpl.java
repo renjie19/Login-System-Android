@@ -1,7 +1,6 @@
 package com.example.testapplication.report.model;
-
-import com.example.testapplication.report.ReportCallBack;
-import com.example.testapplication.utils.Server;
+import com.example.testapplication.utils.CallBack;
+import com.example.testapplication.utils.Preferences;
 
 import java.util.List;
 
@@ -12,21 +11,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReportServiceImpl implements ReportService {
-    private final String BASE_URL = "http://"+ Server.getConfig().getServerAddress()+":8080";
+    private final String BASE_URL = "http://" + Preferences.getAddress() + ":8080";
     private Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
     private ReportRest report = retrofit.create(ReportRest.class);
-    private ReportCallBack callBack;
-
-    public ReportServiceImpl(ReportCallBack callBack) {
-        this.callBack = callBack;
-    }
 
     @Override
-    public void getReport(int id, String startDate, String endDate) {
+    public void getReport(int id, String startDate, String endDate, CallBack callBack) {
         report.getReport(id, startDate, endDate).enqueue(new Callback<List<Report>>() {
             @Override
             public void onResponse(Call<List<Report>> call, Response<List<Report>> response) {
-                callBack.onSuccess(response.body());
+                if(!response.isSuccessful()) {
+                    callBack.onFailure(response.message());
+                } else {
+                    callBack.onSuccess(response.body());
+                }
             }
 
             @Override

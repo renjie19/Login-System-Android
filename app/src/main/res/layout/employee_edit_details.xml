@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/bg"
-    tools:context=".employee.views.EditDetails">
+    tools:context=".employee.views.edit.EditDetailsActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"

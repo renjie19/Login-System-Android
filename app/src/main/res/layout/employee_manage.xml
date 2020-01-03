@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".employee.views.ManageEmployee">
+    tools:context=".employee.views.manage.ManageEmployeeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/employee_rv"

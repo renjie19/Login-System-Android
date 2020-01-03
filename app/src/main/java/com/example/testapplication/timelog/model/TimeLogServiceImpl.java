@@ -1,7 +1,6 @@
 package com.example.testapplication.timelog.model;
-
-import com.example.testapplication.timelog.TimeLogCallBack;
-import com.example.testapplication.utils.Server;
+import com.example.testapplication.utils.CallBack;
+import com.example.testapplication.utils.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,21 +10,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TimeLogServiceImpl implements TimeLogService {
 
-    private Retrofit retrofit;
     private TimelogRest timelogRest;
-    private TimeLogCallBack callBack;
 
-    public TimeLogServiceImpl(TimeLogCallBack callBack) {
-        Server.getConfig();
-        this.callBack = callBack;
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+ Server.getConfig().getServerAddress()+":8080")
+    public TimeLogServiceImpl() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://" + Preferences.getAddress() + ":8080")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         timelogRest = retrofit.create(TimelogRest.class);
     }
 
     @Override
-    public void login(int id) {
+    public void login(int id, CallBack callBack) {
         timelogRest.login(id).enqueue(new Callback<TimeLog>() {
             @Override
             public void onResponse(Call<TimeLog> call, Response<TimeLog> response) {

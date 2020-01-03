@@ -15,16 +15,16 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".settings.view.Settings" />
         <activity android:name=".report.views.ManageReports" />
-        <activity android:name=".employee.views.EditDetails" />
-        <activity android:name=".employee.views.ManageEmployee" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".employee.views.edit.EditDetailsActivity" />
+        <activity android:name=".employee.views.manage.ManageEmployeeActivity" />
+        <activity android:name=".employee.views.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".employee.views.CreateEmployee" />
+        <activity android:name=".employee.views.create.CreateEmployeeActivity" />
     </application>
 
 </manifest>
